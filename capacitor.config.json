@@ -1,0 +1,6 @@
+{
+  "appId": "ci.cmci.suividezone",
+  "appName": "Suivi de Zone",
+  "webDir": "www",
+  "bundledWebRuntime": false
+}

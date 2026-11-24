@@ -1,0 +1,31 @@
+# Suivi de Zone – CMCI Côte d’Ivoire (Version 17)
+
+## Contenu
+- `index.html` : application HTML originale, conservée sans réécriture fonctionnelle.
+- `manifest.webmanifest` : identité et paramètres d’installation PWA.
+- `sw.js` : cache de l’application pour le démarrage hors connexion et mises à jour.
+- `icons/` : icônes créées à partir du logo CMCI fourni.
+- `android-capacitor/` : sources et configuration pour générer le conteneur Android APK avec Capacitor.
+
+## Installation PWA
+1. Publier le contenu de ce dossier sur un hébergement HTTPS (par exemple GitHub Pages).
+2. Ouvrir le lien dans Chrome sur Android puis choisir « Installer l’application » ou « Ajouter à l’écran d’accueil ».
+3. Sur iPhone, ouvrir le lien dans Safari, toucher Partager puis « Sur l’écran d’accueil ».
+4. Ouvrir une première fois l’application avec Internet pour mettre en cache les fichiers. Ensuite, l’application peut démarrer hors connexion.
+
+## Génération APK Android (nécessite un ordinateur, Node.js et Android Studio avec Android SDK)
+Dans le dossier `android-capacitor` :
+
+```bash
+npm install
+npx cap add android
+npx cap sync android
+npx cap open android
+```
+
+Dans Android Studio : Build > Generate Signed Bundle / APK > APK. Créer et conserver une clé de signature privée. Pour publier une mise à jour, conserver le même `applicationId` et la même clé, puis incrémenter `versionCode`.
+
+## Données et précautions
+L’application conserve ses données dans le stockage local du navigateur (LocalStorage et IndexedDB). Les données restent liées au navigateur/profil et à l’installation : elles ne sont pas automatiquement synchronisées entre plusieurs téléphones. Avant une mise à jour ou un changement de navigateur/appareil, exporter une sauvegarde depuis l’application et la conserver en lieu sûr.
+
+Le mode hors connexion dépend du premier chargement réussi en ligne et du support du service worker par le navigateur. Pour iPhone, utiliser Safari et installer depuis « Sur l’écran d’accueil ».
